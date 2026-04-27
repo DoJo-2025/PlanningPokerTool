@@ -75,6 +75,8 @@ A web application that helps teams estimate the complexity of user stories and e
 | FR-22e | **Complexity criteria column headers display dynamic scale values** (e.g., "XS", "S", "M" for T-Shirt; "1 SP", "2 SP" for Fibonacci) matching the selected scale |
 | FR-22f | **Suggestion panel displays scale values dynamically** in breakdown and override buttons (e.g., "L" instead of "5 SP" for T-Shirt sizes) |
 | FR-22g | Unit label ("SP") appears only for Fibonacci-based scales; omitted for T-Shirt and custom scales |
+| FR-22h | **For Stories**: Complexity criteria headers show "⚠ Should be split" (Level 4/5 SP) and "⚠ Must be split" (Level 6/13 SP) warnings for high complexity |
+| FR-22i | **For Epics**: Complexity criteria headers do NOT show "should be split" or "must be split" warnings (Epics are expected to be large) |
 | FR-23 | Settings Page: scale config, and per-type criteria management (add/remove/rename criteria, adjust weights, edit level descriptions) |
 | FR-24 | Dark / Light mode toggle |
 
