@@ -21,7 +21,7 @@ A web application that helps teams estimate the complexity of user stories and e
 
 | ID | Requirement |
 |----|-------------|
-| FR-01 | User can create one estimation item at a time with a title, optional description, and a **type**: Epic or Story |
+| FR-01 | User can create one estimation item at a time with a **type**: Epic or Story (no title/description needed) |
 | FR-02 | Epics and Stories use **separate criteria catalogues**, each independently configurable |
 | FR-03 | The type selection determines which criteria catalogue is shown |
 
@@ -43,8 +43,8 @@ A web application that helps teams estimate the complexity of user stories and e
 | FR-10 | Each level maps to a fixed SP value: Level 1 → 1 SP, Level 2 → 2 SP, Level 3 → 3 SP, Level 4 → 5 SP, Level 5 → 8 SP, Level 6 → 13 SP |
 | FR-11 | The weighted SP score is calculated as: `Σ (sp_value_i × weight_i)` |
 | FR-12 | The score is mapped to the **next higher** value on the configured scale (ceiling, never rounded down) |
-| FR-13 | The suggestion is displayed as a **large, prominent badge** showing only the suggested scale value (centered, text-5xl, no breakdown shown) |
-| FR-14 | The suggestion panel is displayed **below the complexity criteria** in a stacked vertical layout |
+| FR-13 | The suggestion is displayed as a **color-coded badge** (green/blue/amber/red matching complexity level) alongside a compact **calculation breakdown** (criterion contributions as pills) |
+| FR-14 | The suggestion panel is displayed **below the complexity criteria** in a stacked vertical layout with fixed height |
 
 ### 3.4 Scale Configuration
 
@@ -67,16 +67,18 @@ A web application that helps teams estimate the complexity of user stories and e
 | ID | Requirement |
 |----|-------------|
 | FR-21 | App has two pages: **Estimation Page** and **Settings Page** |
-| FR-22 | Estimation Page layout: Type selector (Epic/Story) buttons at the top, complexity criteria below, SP suggestion below criteria (all stacked vertically) |
+| FR-22 | Estimation Page layout: Type selector (Epic/Story segmented control) at the top with Reset button, complexity criteria below, SP suggestion below criteria (all stacked vertically) |
 | FR-22a | Type selector (Epic/Story buttons) is the primary control at the top of Estimation Page |
 | FR-22b | Title and description input fields are **removed** from Estimation Page (no longer needed) |
 | FR-22c | Complexity criteria matrix is displayed below type selector |
 | FR-22d | SP Suggestion card appears **below the complexity criteria** in the same vertical flow |
-| FR-22e | **Suggestion displays only the large suggested value badge** (no breakdown or override buttons) for clean, focused UI |
+| FR-22e | **Suggestion displays the color-coded badge (right) and compact breakdown pills (left)** showing each criterion's contribution for transparency |
 | FR-22f | **Complexity criteria column headers display dynamic scale values** (e.g., "XS", "S", "M" for T-Shirt; "1 SP", "2 SP" for Fibonacci) matching the selected scale |
-| FR-22g | Unit label ("SP") appears only for Fibonacci-based scales; omitted for T-Shirt and custom scales |
+| FR-22g | Unit label ("SP") is **not displayed** in the suggestion badge; only the raw value is shown |
 | FR-22h | **For Stories**: Complexity criteria headers show "⚠ Should be split" (Level 4/5 SP) and "⚠ Must be split" (Level 6/13 SP) warnings for high complexity |
 | FR-22i | **For Epics**: Complexity criteria headers do NOT show "should be split" or "must be split" warnings (Epics are expected to be large) |
+| FR-22j | A **Reset button** is shown next to the type selector to clear all ratings (disabled when no ratings exist) |
+| FR-22k | **Suggestion badge is color-coded** by complexity: 1–2 green (emerald), 3–5 blue (brand/indigo), 8 amber, 13 red |
 | FR-23 | Settings Page: scale config, and per-type criteria management (add/remove/rename criteria, adjust weights, edit level descriptions) |
 | FR-24 | Dark / Light mode toggle |
 

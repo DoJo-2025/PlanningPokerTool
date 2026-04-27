@@ -51,9 +51,9 @@ src/
 │   │   ├── CriteriaPanel.tsx         # Matrix with dynamic scale headers (Story/Epic warnings)
 │   │   └── CriterionLevelSelector.tsx # Single criterion with 6 labelled level cards
 │   ├── result/
-│   │   └── ResultPanel.tsx            # Large centered badge showing only suggested value
+│   │   └── ResultPanel.tsx            # Breakdown pills (left) + color-coded badge (right), fixed height
 │   ├── story/
-│   │   └── TypeSelector.tsx           # Epic / Story toggle buttons
+│   │   └── TypeSelector.tsx           # Epic / Story segmented control with icons
 │   ├── settings/
 │   │   ├── ScaleConfig.tsx            # Preset picker + custom scale input
 │   │   └── CriteriaConfig.tsx         # Add/remove/rename criteria, weights, level descriptions
@@ -220,9 +220,9 @@ graph TD
 ```
 
 ### Estimation Page Components Structure
-- **Top**: Type Selector (Epic/Story toggle)
-- **Below**: Complexity Criteria with dynamic scale headers
-- **Bottom**: Suggestion Panel with large badge
+- **Top row**: Type Selector (segmented control with icons) + Reset Button (right-aligned)
+- **Middle**: Complexity Criteria matrix with dynamic scale headers and color-coded columns
+- **Bottom**: Suggestion Panel (breakdown pills left + color-coded badge right, fixed height)
 
 
 ### Settings Page Layout
@@ -240,14 +240,26 @@ graph TD
 
 ### Dynamic Scale Display
 - **Criteria Panel Headers**: Display actual scale values (e.g., "XS", "S", "M" for T-Shirt; "1 SP", "2 SP" for Fibonacci)
-- **Suggestion Badge**: Shows scale values with appropriate units ("SP" only for Fibonacci-based scales)
-- **Unit Labels**: Omitted for T-Shirt and custom scales
+- **Suggestion Badge**: Shows only the numeric/scale value (no unit label)
+- **Badge Color**: Color-coded by complexity (1–2 emerald, 3–5 indigo, 8 amber, ≥13 red)
 
 ### Story vs. Epic Warnings
-- **Stories**: Column headers show "⚠ Should be split" (Lvl 4-5) and "⚠ Must be split" (Lvl 6) warnings
+- **Stories**: Column headers show "⚠ Should be split" (Lvl 5) and "⚠ Must be split" (Lvl 6) warnings
 - **Epics**: No warnings shown (Epics are expected to be large)
 
 ### Suggestion Panel
+- **Layout**: Breakdown pills on the left (criterion name + contribution), badge on the right
+- **Fixed height**: Panel does not resize on selection changes
+- **Breakdown pills**: Each shows criterion label and weighted contribution, color-coded by level
+
+### Reset & Interactions
+- **Reset button**: Next to type selector, clears all ratings and result
+- **Animations**: Fade-in for rows, slide-up for results, scale-in for badge
+
+### Design System
+- **Brand color**: Indigo (50–950 scale)
+- **Header**: Glassmorphism with backdrop-blur, pill-shaped nav tabs
+- **Dark mode**: Full dark mode support with toggle in header
 - **Display**: Large centered badge showing only the suggested value
 - **Height**: Fixed, matching the full height of the Criteria Panel for visual balance
 - **No breakdown**: Simplified UI for faster decision-making
