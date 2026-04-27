@@ -67,11 +67,14 @@ A web application that helps teams estimate the complexity of user stories and e
 | ID | Requirement |
 |----|-------------|
 | FR-21 | App has two pages: **Estimation Page** and **Settings Page** |
-| FR-22 | Estimation Page layout: Type selector (Epic/Story) buttons positioned at the top, criteria level selectors below, result/proposal card positioned horizontally to the right of the type buttons |
+| FR-22 | Estimation Page layout: Type selector (Epic/Story) buttons at the top, complexity criteria (left column) and SP suggestion card (right column) on desktop, stacked on mobile |
 | FR-22a | Type selector (Epic/Story buttons) is the primary control at the top of Estimation Page |
 | FR-22b | Title and description input fields are **removed** from Estimation Page (no longer needed) |
-| FR-22c | Complexity criteria matrix is displayed below the type selector |
-| FR-22d | SP Suggestion card appears to the right of the type selector buttons (horizontal layout on desktop) |
+| FR-22c | Complexity criteria matrix is displayed below type selector (left column on desktop) |
+| FR-22d | SP Suggestion card appears in the right column next to criteria (desktop) or below (mobile) |
+| FR-22e | **Complexity criteria column headers display dynamic scale values** (e.g., "XS", "S", "M" for T-Shirt; "1 SP", "2 SP" for Fibonacci) matching the selected scale |
+| FR-22f | **Suggestion panel displays scale values dynamically** in breakdown and override buttons (e.g., "L" instead of "5 SP" for T-Shirt sizes) |
+| FR-22g | Unit label ("SP") appears only for Fibonacci-based scales; omitted for T-Shirt and custom scales |
 | FR-23 | Settings Page: scale config, and per-type criteria management (add/remove/rename criteria, adjust weights, edit level descriptions) |
 | FR-24 | Dark / Light mode toggle |
 
