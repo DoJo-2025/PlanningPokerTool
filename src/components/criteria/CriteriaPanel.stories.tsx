@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { userEvent, within, expect } from '@storybook/test'
 import { useState } from 'react'
 import { CriteriaPanel } from './CriteriaPanel'
-import { DEFAULT_STORY_CRITERIA, type CriterionRating } from '../../types'
+import { DEFAULT_STORY_CRITERIA, type CriterionRating, SCALE_PRESETS } from '../../types'
 
 function Controlled() {
   const [ratings, setRatings] = useState<CriterionRating[]>([])
@@ -10,6 +10,7 @@ function Controlled() {
     <CriteriaPanel
       criteria={DEFAULT_STORY_CRITERIA}
       ratings={ratings}
+      scale={{ preset: 'fibonacci', values: SCALE_PRESETS.fibonacci }}
       onRate={(criterionId, selectedLevel) =>
         setRatings((prev) => {
           const next = prev.filter((r) => r.criterionId !== criterionId)
