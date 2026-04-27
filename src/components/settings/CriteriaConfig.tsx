@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { type Criterion, type ItemType, LEVEL_SP_MAP } from '../../types'
+import { type Criterion, type ItemType } from '../../types'
 import { nanoid } from '../../utils/nanoid'
 
 interface CriteriaConfigProps {
@@ -98,8 +98,8 @@ export function CriteriaConfig({
             <div className="border-t border-gray-100 dark:border-gray-700 px-4 py-3 flex flex-col gap-2">
               {c.levels.map((l) => (
                 <div key={l.level} className="flex items-center gap-3">
-                  <span className="w-20 shrink-0 text-xs font-semibold text-gray-400 uppercase tracking-widest">
-                    Lvl {l.level} · {LEVEL_SP_MAP[l.level]} SP
+                  <span className="w-12 shrink-0 text-xs font-semibold text-gray-400 uppercase tracking-widest">
+                    Lvl {l.level}
                   </span>
                   <input
                     type="text"
