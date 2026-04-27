@@ -67,7 +67,11 @@ A web application that helps teams estimate the complexity of user stories and e
 | ID | Requirement |
 |----|-------------|
 | FR-21 | App has two pages: **Estimation Page** and **Settings Page** |
-| FR-22 | Estimation Page: type selector (Epic/Story), title + description input, criteria level selectors, result/proposal card |
+| FR-22 | Estimation Page layout: Type selector (Epic/Story) buttons positioned at the top, criteria level selectors below, result/proposal card positioned horizontally to the right of the type buttons |
+| FR-22a | Type selector (Epic/Story buttons) is the primary control at the top of Estimation Page |
+| FR-22b | Title and description input fields are **removed** from Estimation Page (no longer needed) |
+| FR-22c | Complexity criteria matrix is displayed below the type selector |
+| FR-22d | SP Suggestion card appears to the right of the type selector buttons (horizontal layout on desktop) |
 | FR-23 | Settings Page: scale config, and per-type criteria management (add/remove/rename criteria, adjust weights, edit level descriptions) |
 | FR-24 | Dark / Light mode toggle |
 
