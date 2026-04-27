@@ -1,8 +1,9 @@
-import { type Criterion, type CriterionRating, LEVEL_SP_MAP } from '../../types'
+import { type Criterion, type CriterionRating, type ScaleConfig, LEVEL_SP_MAP } from '../../types'
 
 interface CriteriaPanelProps {
   criteria: Criterion[]
   ratings: CriterionRating[]
+  scale: ScaleConfig
   onRate: (criterionId: string, level: number) => void
 }
 
@@ -48,9 +49,22 @@ const COLUMN_ACCENT: Record<number, { header: string; card: string; cardSelected
   },
 }
 
-export function CriteriaPanel({ criteria, ratings, onRate }: CriteriaPanelProps) {
+export function CriteriaPanel({ criteria, ratings, scale, onRate }: CriteriaPanelProps) {
   const ratingMap = new Map(ratings.map((r) => [r.criterionId, r.selectedLevel]))
   const levels = [1, 2, 3, 4, 5, 6]
+
+  // Helper: get scale value for a level
+  function getScaleValueForLevel(level: number): string | number {
+    if (scale.values.length < level) return '?'
+    return scale.values[level - 1]
+  }
+
+  // Helper: get unit label
+  function getUnitLabel(): string {
+    if (scale.preset === 'tshirt') return ''
+    if (scale.preset === 'custom') return ''
+    return 'SP'
+  }
 
   return (
     <div className="w-full overflow-x-auto">
@@ -62,6 +76,8 @@ export function CriteriaPanel({ criteria, ratings, onRate }: CriteriaPanelProps)
         <div />
         {levels.map((level) => {
           const sp = LEVEL_SP_MAP[level]
+          const scaleValue = getScaleValueForLevel(level)
+          const unitLabel = getUnitLabel()
           const warning = SP_WARNINGS[sp]
           const accent = COLUMN_ACCENT[level]
           return (
@@ -69,7 +85,7 @@ export function CriteriaPanel({ criteria, ratings, onRate }: CriteriaPanelProps)
               key={level}
               className={`rounded-xl px-3 py-2 text-center font-bold ${accent.header}`}
             >
-              <div className="text-xl">{sp} SP</div>
+              <div className="text-xl">{scaleValue}{unitLabel && ` ${unitLabel}`}</div>
               {warning && (
                 <div className="text-xs font-normal mt-0.5 leading-tight opacity-80">
                   ⚠ {warning}
