@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { ResultPanel } from './ResultPanel'
-import { type EstimationResult, SCALE_PRESETS } from '../../types'
-
-const fibScale = { preset: 'fibonacci' as const, values: SCALE_PRESETS.fibonacci }
+import { type EstimationResult } from '../../types'
 
 const mockResult: EstimationResult = {
   weightedScore: 3.1,
@@ -26,26 +24,17 @@ export default meta
 type Story = StoryObj<typeof ResultPanel>
 
 export const NoResult: Story = {
-  args: { result: null, scale: fibScale },
+  args: { result: null },
 }
 
 export const WithSuggestion: Story = {
-  args: { result: mockResult, scale: fibScale },
+  args: { result: mockResult },
 }
 
 export const WithOverride: Story = {
-  args: { result: mockResultWithOverride, scale: fibScale },
-}
-
-function Controlled() {
-  return (
-    <ResultPanel
-      result={mockResult}
-      scale={fibScale}
-    />
-  )
+  args: { result: mockResultWithOverride },
 }
 
 export const Default: Story = {
-  render: () => <Controlled />,
+  render: () => <ResultPanel result={mockResult} />,
 }

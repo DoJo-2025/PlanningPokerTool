@@ -50,10 +50,7 @@ export function EstimationPage() {
         <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400">
           Suggestion
         </h2>
-        <ResultPanel
-          result={result}
-          scale={scale}
-        />
+        <ResultPanel result={result} />
       </div>
     </div>
   )
