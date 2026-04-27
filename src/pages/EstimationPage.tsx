@@ -9,7 +9,7 @@ import { computeEstimation } from '../engine/suggestionEngine'
 export function EstimationPage() {
   const {
     itemType, ratings, result,
-    setItemType, setRating, setResult,
+    setItemType, setRating, setResult, reset,
   } = useSessionStore()
 
   const { storyScale, epicScale, storyCriteria, epicCriteria } = useSettingsStore()
@@ -47,9 +47,18 @@ export function EstimationPage() {
 
       {/* Suggestion – below criteria */}
       <div className="flex flex-col gap-2">
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400">
-          Suggestion
-        </h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400">
+            Suggestion
+          </h2>
+          <button
+            type="button"
+            onClick={reset}
+            className="text-xs font-medium text-gray-400 hover:text-red-500 transition-colors"
+          >
+            ↺ Reset
+          </button>
+        </div>
         <ResultPanel result={result} />
       </div>
     </div>
