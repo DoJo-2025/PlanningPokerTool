@@ -4,6 +4,7 @@ interface CriteriaPanelProps {
   criteria: Criterion[]
   ratings: CriterionRating[]
   scale: ScaleConfig
+  showWarnings?: boolean // default: true for stories, false for epics
   onRate: (criterionId: string, level: number) => void
 }
 
@@ -49,7 +50,7 @@ const COLUMN_ACCENT: Record<number, { header: string; card: string; cardSelected
   },
 }
 
-export function CriteriaPanel({ criteria, ratings, scale, onRate }: CriteriaPanelProps) {
+export function CriteriaPanel({ criteria, ratings, scale, showWarnings = true, onRate }: CriteriaPanelProps) {
   const ratingMap = new Map(ratings.map((r) => [r.criterionId, r.selectedLevel]))
   const levels = [1, 2, 3, 4, 5, 6]
 
@@ -78,7 +79,7 @@ export function CriteriaPanel({ criteria, ratings, scale, onRate }: CriteriaPane
           const sp = LEVEL_SP_MAP[level]
           const scaleValue = getScaleValueForLevel(level)
           const unitLabel = getUnitLabel()
-          const warning = SP_WARNINGS[sp]
+          const warning = showWarnings ? SP_WARNINGS[sp] : null
           const accent = COLUMN_ACCENT[level]
           return (
             <div

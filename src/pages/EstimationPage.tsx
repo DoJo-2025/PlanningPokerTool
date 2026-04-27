@@ -42,6 +42,7 @@ export function EstimationPage() {
             criteria={criteria}
             ratings={ratings}
             scale={scale}
+            showWarnings={itemType === 'story'}
             onRate={(criterionId, level) => setRating({ criterionId, selectedLevel: level })}
           />
         </div>
