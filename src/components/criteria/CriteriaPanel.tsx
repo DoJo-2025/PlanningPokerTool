@@ -71,8 +71,8 @@ export function CriteriaPanel({ criteria, ratings, scale, showWarnings = true, o
     <div className="w-full overflow-x-auto">
       {/* Column headers */}
       <div
-        className="grid gap-2 mb-2"
-        style={{ gridTemplateColumns: `220px repeat(${levels.length}, minmax(140px, 1fr))` }}
+        className="grid gap-2 mb-3"
+        style={{ gridTemplateColumns: `200px repeat(${levels.length}, minmax(130px, 1fr))` }}
       >
         <div />
         {levels.map((level) => {
@@ -84,11 +84,11 @@ export function CriteriaPanel({ criteria, ratings, scale, showWarnings = true, o
           return (
             <div
               key={level}
-              className={`rounded-xl px-3 py-2 text-center font-bold ${accent.header}`}
+              className={`rounded-xl px-3 py-2.5 text-center font-bold ${accent.header}`}
             >
-              <div className="text-xl">{scaleValue}{unitLabel && ` ${unitLabel}`}</div>
+              <div className="text-lg">{scaleValue}{unitLabel && ` ${unitLabel}`}</div>
               {warning && (
-                <div className="text-xs font-normal mt-0.5 leading-tight opacity-80">
+                <div className="text-[10px] font-medium mt-1 leading-tight opacity-75">
                   ⚠ {warning}
                 </div>
               )}
@@ -98,21 +98,21 @@ export function CriteriaPanel({ criteria, ratings, scale, showWarnings = true, o
       </div>
 
       {/* Criterion rows */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2.5">
         {criteria.map((criterion) => {
           const selected = ratingMap.get(criterion.id)
           return (
             <div
               key={criterion.id}
-              className="grid gap-2 items-stretch"
-              style={{ gridTemplateColumns: `220px repeat(${levels.length}, minmax(140px, 1fr))` }}
+              className="grid gap-2 items-stretch animate-fade-in"
+              style={{ gridTemplateColumns: `200px repeat(${levels.length}, minmax(130px, 1fr))` }}
             >
               {/* Row label */}
-              <div className="flex flex-col justify-center px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-                <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+              <div className="flex flex-col justify-center px-4 py-2.5 rounded-xl bg-gray-100/80 dark:bg-gray-800/80 border border-gray-200/60 dark:border-gray-700/60">
+                <span className="text-sm font-semibold text-gray-800 dark:text-gray-100 leading-tight">
                   {criterion.label}
                 </span>
-                <span className="text-xs text-gray-400 mt-0.5">
+                <span className="text-[11px] text-gray-400 dark:text-gray-500 mt-0.5 font-medium">
                   {Math.round(criterion.weight * 100)}% weight
                 </span>
               </div>
@@ -128,10 +128,10 @@ export function CriteriaPanel({ criteria, ratings, scale, showWarnings = true, o
                     onClick={() => onRate(criterion.id, l.level)}
                     aria-pressed={isSelected}
                     className={[
-                      'rounded-xl border-2 px-3 py-3 text-left text-sm leading-snug transition-all duration-150 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500',
+                      'rounded-xl border-2 px-3 py-2.5 text-left text-[13px] leading-snug transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 cursor-pointer',
                       isSelected
-                        ? `${accent.cardSelected} shadow-md font-semibold text-gray-900 dark:text-gray-50`
-                        : `bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 shadow-sm ${accent.card}`,
+                        ? `${accent.cardSelected} shadow-md font-semibold text-gray-900 dark:text-gray-50 scale-[1.02]`
+                        : `bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 shadow-sm hover:shadow-md hover:scale-[1.01] ${accent.card}`,
                     ].join(' ')}
                   >
                     {l.description}

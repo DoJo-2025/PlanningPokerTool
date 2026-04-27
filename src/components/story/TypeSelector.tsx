@@ -7,7 +7,7 @@ interface TypeSelectorProps {
 
 export function TypeSelector({ value, onChange }: TypeSelectorProps) {
   return (
-    <div className="flex gap-2" role="group" aria-label="Item type">
+    <div className="inline-flex rounded-xl bg-gray-100 dark:bg-gray-800/60 p-1 gap-1" role="group" aria-label="Item type">
       {(['story', 'epic'] as ItemType[]).map((type) => (
         <button
           key={type}
@@ -15,13 +15,13 @@ export function TypeSelector({ value, onChange }: TypeSelectorProps) {
           onClick={() => onChange(type)}
           aria-pressed={value === type}
           className={[
-            'capitalize rounded-lg px-5 py-2 text-sm font-semibold border-2 transition-all',
+            'capitalize rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-200',
             value === type
-              ? 'bg-brand-600 text-white border-brand-600 shadow'
-              : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-brand-400',
+              ? 'bg-white dark:bg-gray-700 text-brand-600 dark:text-brand-400 shadow-sm'
+              : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200',
           ].join(' ')}
         >
-          {type}
+          {type === 'story' ? '📋 Story' : '🏔️ Epic'}
         </button>
       ))}
     </div>
