@@ -25,9 +25,8 @@ graph TD
     App --> EstimationPage[Estimation Page]
     App --> SettingsPage[Settings Page]
     EstimationPage --> TypeSelector[Epic / Story Selector]
-    EstimationPage --> StoryForm[Title + Description Form]
-    EstimationPage --> CriteriaPanel[Criteria Panel]
-    EstimationPage --> ResultPanel[Result / Proposal Panel]
+    EstimationPage --> CriteriaPanel[Criteria Panel<br/>Dynamic Scale Headers]
+    EstimationPage --> ResultPanel[Suggestion Badge<br/>Large Display]
     TypeSelector --> SettingsStore[Zustand Settings Store]
     CriteriaPanel --> SuggestionEngine[Suggestion Engine]
     SuggestionEngine --> ResultPanel
@@ -49,30 +48,29 @@ graph TD
 src/
 ├── components/
 │   ├── criteria/
-│   │   ├── CriteriaPanel.tsx         # Renders all criteria level-selectors for current type
+│   │   ├── CriteriaPanel.tsx         # Matrix with dynamic scale headers (Story/Epic warnings)
 │   │   └── CriterionLevelSelector.tsx # Single criterion with 6 labelled level cards
 │   ├── result/
-│   │   └── ResultPanel.tsx            # Proposal card + breakdown + manual override
+│   │   └── ResultPanel.tsx            # Large centered badge showing only suggested value
 │   ├── story/
-│   │   ├── StoryForm.tsx              # Title + description input
-│   │   └── TypeSelector.tsx           # Epic / Story toggle
+│   │   └── TypeSelector.tsx           # Epic / Story toggle buttons
 │   ├── settings/
 │   │   ├── ScaleConfig.tsx            # Preset picker + custom scale input
 │   │   └── CriteriaConfig.tsx         # Add/remove/rename criteria, weights, level descriptions
 │   └── ui/
 │       ├── LevelCard.tsx              # Single level option card
-│       ├── Badge.tsx                  # Story point badge
+│       ├── Badge.tsx                  # Story point / scale value badge
 │       └── ThemeToggle.tsx            # Dark/light mode toggle
 ├── engine/
 │   └── suggestionEngine.ts            # Weighted SP calculation + ceiling scale mapping
 ├── store/
 │   ├── useSettingsStore.ts            # Scale config + criteria catalogues (persisted)
-│   └── useSessionStore.ts             # Current item type, title, level selections, result
+│   └── useSessionStore.ts             # Current item type, level selections, result
 ├── types/
 │   └── index.ts                       # Shared TypeScript interfaces
 ├── pages/
-│   ├── EstimationPage.tsx
-│   └── SettingsPage.tsx
+│   ├── EstimationPage.tsx             # Main: Type Selector (top), Criteria (left), Suggestion (right)
+│   └── SettingsPage.tsx               # Scale + Criteria configuration
 ├── App.tsx
 └── main.tsx
 ```
@@ -196,11 +194,9 @@ First value ≥ 3.10 → **5 SP** (ceiling, not 3)
 | State | Type | Description |
 |-------|------|-------------|
 | `itemType` | `ItemType` | 'story' or 'epic' |
-| `title` | `string` | Item title |
-| `description` | `string` | Optional description |
 | `ratings` | `CriterionRating[]` | Current level selections |
 | `result` | `EstimationResult \| null` | Computed proposal |
-| Actions | `setItemType`, `setTitle`, `setDescription`, `setRating`, `setFinalValue`, `reset` | |
+| Actions | `setItemType`, `setRating`, `setResult`, `reset` | |
 
 ---
 
@@ -213,15 +209,23 @@ First value ≥ 3.10 → **5 SP** (ceiling, not 3)
 
 ---
 
-## 8. UI Layout
+## 8. UI Layout – Estimation Page
 
 ```mermaid
-graph LR
+graph TD
     Header[Header: App Title + Settings Link + Theme Toggle]
-    Header --> Main
-    Main --> Left[Left Panel: Type Selector + Story Form + Criteria Level Selectors]
-    Main --> Right[Right Panel: Proposal Card + Breakdown + Manual Override]
+    Header --> TypeSelect[Type Selector: Story / Epic Buttons]
+    TypeSelect --> Main[Two-Column Layout Desktop / Stacked Mobile]
+    Main --> LeftCol[Left Column: Criteria Matrix<br/>Dynamic Headers by Scale<br/>Story: Warnings for high levels<br/>Epic: No warnings]
+    Main --> RightCol[Right Column: Suggestion Badge<br/>Large centered value<br/>Matches Criteria height]
 ```
+
+### Estimation Page Components Structure
+- **Top**: Type Selector (Epic/Story toggle)
+- **Below**: 
+  - **Left (flex-1)**: Complexity Criteria with dynamic scale headers
+  - **Right (lg:w-96)**: Suggestion Panel with large badge (fixed height)
+
 
 ### Settings Page Layout
 
@@ -234,7 +238,25 @@ graph TD
 
 ---
 
-## 9. Default Criteria Catalogues
+## 9. Key UI Features
+
+### Dynamic Scale Display
+- **Criteria Panel Headers**: Display actual scale values (e.g., "XS", "S", "M" for T-Shirt; "1 SP", "2 SP" for Fibonacci)
+- **Suggestion Badge**: Shows scale values with appropriate units ("SP" only for Fibonacci-based scales)
+- **Unit Labels**: Omitted for T-Shirt and custom scales
+
+### Story vs. Epic Warnings
+- **Stories**: Column headers show "⚠ Should be split" (Lvl 4-5) and "⚠ Must be split" (Lvl 6) warnings
+- **Epics**: No warnings shown (Epics are expected to be large)
+
+### Suggestion Panel
+- **Display**: Large centered badge showing only the suggested value
+- **Height**: Fixed, matching the full height of the Criteria Panel for visual balance
+- **No breakdown**: Simplified UI for faster decision-making
+
+---
+
+## 10. Default Criteria Catalogues
 
 ### Stories (default)
 
