@@ -5,8 +5,9 @@ import { type Criterion } from '../types'
 
 export function SettingsPage() {
   const {
-    scale, storyCriteria, epicCriteria,
-    setScale,
+    storyScale, epicScale,
+    storyCriteria, epicCriteria,
+    setStoryScale, setEpicScale,
     addCriterion, removeCriterion, updateCriterion, updateLevelDescription,
     resetDefaults,
   } = useSettingsStore()
@@ -24,11 +25,23 @@ export function SettingsPage() {
         </button>
       </div>
 
-      {/* Scale */}
+      {/* Story scale */}
       <section className="flex flex-col gap-3">
-        <h2 className="text-base font-semibold text-gray-700 dark:text-gray-200">Story Point Scale</h2>
+        <h2 className="text-base font-semibold text-gray-700 dark:text-gray-200">
+          Story – Point Scale
+        </h2>
         <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
-          <ScaleConfigPanel scale={scale} onChange={setScale} />
+          <ScaleConfigPanel scale={storyScale} onChange={setStoryScale} />
+        </div>
+      </section>
+
+      {/* Epic scale */}
+      <section className="flex flex-col gap-3">
+        <h2 className="text-base font-semibold text-gray-700 dark:text-gray-200">
+          Epic – Size Scale
+        </h2>
+        <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
+          <ScaleConfigPanel scale={epicScale} onChange={setEpicScale} />
         </div>
       </section>
 

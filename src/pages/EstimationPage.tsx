@@ -13,8 +13,9 @@ export function EstimationPage() {
     setItemType, setTitle, setDescription, setRating, setResult, setFinalValue,
   } = useSessionStore()
 
-  const { scale, storyCriteria, epicCriteria } = useSettingsStore()
+  const { storyScale, epicScale, storyCriteria, epicCriteria } = useSettingsStore()
   const criteria = itemType === 'story' ? storyCriteria : epicCriteria
+  const scale = itemType === 'story' ? storyScale : epicScale
 
   // Recompute suggestion whenever ratings change
   useEffect(() => {

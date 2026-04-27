@@ -10,12 +10,14 @@ import {
 } from '../types'
 
 interface SettingsState {
-  scale: ScaleConfig
+  storyScale: ScaleConfig
+  epicScale: ScaleConfig
   storyCriteria: Criterion[]
   epicCriteria: Criterion[]
 
   // Scale actions
-  setScale: (scale: ScaleConfig) => void
+  setStoryScale: (scale: ScaleConfig) => void
+  setEpicScale: (scale: ScaleConfig) => void
 
   // Criteria actions (type-aware)
   addCriterion: (itemType: 'story' | 'epic', criterion: Criterion) => void
@@ -37,11 +39,13 @@ interface SettingsState {
 export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
-      scale: { preset: 'fibonacci', values: SCALE_PRESETS.fibonacci },
+      storyScale: { preset: 'fibonacci', values: SCALE_PRESETS.fibonacci },
+      epicScale: { preset: 'tshirt', values: SCALE_PRESETS.tshirt },
       storyCriteria: DEFAULT_STORY_CRITERIA,
       epicCriteria: DEFAULT_EPIC_CRITERIA,
 
-      setScale: (scale) => set({ scale }),
+      setStoryScale: (storyScale) => set({ storyScale }),
+      setEpicScale: (epicScale) => set({ epicScale }),
 
       addCriterion: (itemType, criterion) =>
         set((s) =>
@@ -86,7 +90,8 @@ export const useSettingsStore = create<SettingsState>()(
 
       resetDefaults: () =>
         set({
-          scale: { preset: 'fibonacci', values: SCALE_PRESETS.fibonacci },
+          storyScale: { preset: 'fibonacci', values: SCALE_PRESETS.fibonacci },
+          epicScale: { preset: 'tshirt', values: SCALE_PRESETS.tshirt },
           storyCriteria: DEFAULT_STORY_CRITERIA,
           epicCriteria: DEFAULT_EPIC_CRITERIA,
         }),
