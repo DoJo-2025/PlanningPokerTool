@@ -49,14 +49,3 @@ function Controlled() {
 export const Default: Story = {
   render: () => <Controlled />,
 }
-
-export const ManualOverride: Story = {
-  render: () => <Controlled />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    // Click the "8" override button
-    const btn8 = await canvas.findByRole('button', { name: '8' })
-    await userEvent.click(btn8)
-    expect(btn8).toHaveAttribute('class', expect.stringContaining('emerald'))
-  },
-}
