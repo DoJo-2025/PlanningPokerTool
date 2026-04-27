@@ -1,7 +1,15 @@
-import { type EstimationResult } from '../../types'
+import { type EstimationResult, numericScaleValue } from '../../types'
 
 interface ResultPanelProps {
   result: EstimationResult | null
+}
+
+// Same color progression as CriteriaPanel columns: green → blue → amber → red
+function getBadgeColors(score: number): string {
+  if (score <= 2) return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 ring-emerald-400'
+  if (score <= 4) return 'bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300 ring-brand-400'
+  if (score <= 7) return 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 ring-amber-400'
+  return 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 ring-red-400'
 }
 
 export function ResultPanel({ result }: ResultPanelProps) {
@@ -14,6 +22,8 @@ export function ResultPanel({ result }: ResultPanelProps) {
   }
 
   const displayValue = result.finalValue ?? result.suggestedValue
+  const numericValue = numericScaleValue(displayValue)
+  const badgeColors = getBadgeColors(numericValue)
 
   return (
     <div className="h-28 flex items-center rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-6 shadow-sm">
@@ -33,9 +43,9 @@ export function ResultPanel({ result }: ResultPanelProps) {
         </span>
       </div>
 
-      {/* Badge – right side, fixed size */}
+      {/* Badge – right side, fixed size, color matches complexity level */}
       <div className="ml-6 flex-shrink-0">
-        <span className="inline-flex items-center justify-center w-16 h-16 rounded-full font-extrabold bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300 ring-4 ring-brand-400 text-3xl">
+        <span className={`inline-flex items-center justify-center w-16 h-16 rounded-full font-extrabold ring-4 text-3xl ${badgeColors}`}>
           {displayValue}
         </span>
       </div>
