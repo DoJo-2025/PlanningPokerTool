@@ -31,36 +31,29 @@ export function EstimationPage() {
         <TypeSelector value={itemType} onChange={setItemType} />
       </div>
 
-      {/* Main layout: Criteria (left) + Suggestion (right) */}
-      <div className="flex flex-col lg:flex-row gap-6 lg:items-stretch">
-        {/* Criteria matrix – left/full width */}
-        <div className="flex-1 flex flex-col gap-2">
-          <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400"> 
-            Complexity criteria
-          </h2>
-          <div className="flex-1">
-            <CriteriaPanel
-              criteria={criteria}
-              ratings={ratings}
-              scale={scale}
-              showWarnings={itemType === 'story'}
-              onRate={(criterionId, level) => setRating({ criterionId, selectedLevel: level })}
-            />
-          </div>
-        </div>
+      {/* Criteria matrix */}
+      <div className="flex flex-col gap-2">
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400">
+          Complexity criteria
+        </h2>
+        <CriteriaPanel
+          criteria={criteria}
+          ratings={ratings}
+          scale={scale}
+          showWarnings={itemType === 'story'}
+          onRate={(criterionId, level) => setRating({ criterionId, selectedLevel: level })}
+        />
+      </div>
 
-        {/* Result panel – right side, same height as criteria */}
-        <div className="w-full lg:w-96 flex flex-col gap-2">
-          <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400">
-            Suggestion
-          </h2>
-          <div className="flex-1">
-            <ResultPanel
-              result={result}
-              scale={scale}
-            />
-          </div>
-        </div>
+      {/* Suggestion – below criteria */}
+      <div className="flex flex-col gap-2">
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400">
+          Suggestion
+        </h2>
+        <ResultPanel
+          result={result}
+          scale={scale}
+        />
       </div>
     </div>
   )

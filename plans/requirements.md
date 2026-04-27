@@ -44,7 +44,7 @@ A web application that helps teams estimate the complexity of user stories and e
 | FR-11 | The weighted SP score is calculated as: `Σ (sp_value_i × weight_i)` |
 | FR-12 | The score is mapped to the **next higher** value on the configured scale (ceiling, never rounded down) |
 | FR-13 | The suggestion is displayed as a **large, prominent badge** showing only the suggested scale value (centered, text-5xl, no breakdown shown) |
-| FR-14 | The suggestion panel has **fixed height matching the complexity criteria panel** for consistent visual balance |
+| FR-14 | The suggestion panel is displayed **below the complexity criteria** in a stacked vertical layout |
 
 ### 3.4 Scale Configuration
 
@@ -67,11 +67,11 @@ A web application that helps teams estimate the complexity of user stories and e
 | ID | Requirement |
 |----|-------------|
 | FR-21 | App has two pages: **Estimation Page** and **Settings Page** |
-| FR-22 | Estimation Page layout: Type selector (Epic/Story) buttons at the top, complexity criteria (left column) and SP suggestion card (right column) on desktop, stacked on mobile |
+| FR-22 | Estimation Page layout: Type selector (Epic/Story) buttons at the top, complexity criteria below, SP suggestion below criteria (all stacked vertically) |
 | FR-22a | Type selector (Epic/Story buttons) is the primary control at the top of Estimation Page |
 | FR-22b | Title and description input fields are **removed** from Estimation Page (no longer needed) |
-| FR-22c | Complexity criteria matrix is displayed below type selector (left column on desktop) |
-| FR-22d | SP Suggestion card appears in the right column next to criteria (desktop) or below (mobile) with **fixed height matching criteria panel height** |
+| FR-22c | Complexity criteria matrix is displayed below type selector |
+| FR-22d | SP Suggestion card appears **below the complexity criteria** in the same vertical flow |
 | FR-22e | **Suggestion displays only the large suggested value badge** (no breakdown or override buttons) for clean, focused UI |
 | FR-22f | **Complexity criteria column headers display dynamic scale values** (e.g., "XS", "S", "M" for T-Shirt; "1 SP", "2 SP" for Fibonacci) matching the selected scale |
 | FR-22g | Unit label ("SP") appears only for Fibonacci-based scales; omitted for T-Shirt and custom scales |

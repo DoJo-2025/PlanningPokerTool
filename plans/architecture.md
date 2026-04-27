@@ -69,7 +69,7 @@ src/
 ├── types/
 │   └── index.ts                       # Shared TypeScript interfaces
 ├── pages/
-│   ├── EstimationPage.tsx             # Main: Type Selector (top), Criteria (left), Suggestion (right)
+│   ├── EstimationPage.tsx             # Main: Type Selector (top), Criteria, Suggestion (stacked)
 │   └── SettingsPage.tsx               # Scale + Criteria configuration
 ├── App.tsx
 └── main.tsx
@@ -215,16 +215,14 @@ First value ≥ 3.10 → **5 SP** (ceiling, not 3)
 graph TD
     Header[Header: App Title + Settings Link + Theme Toggle]
     Header --> TypeSelect[Type Selector: Story / Epic Buttons]
-    TypeSelect --> Main[Two-Column Layout Desktop / Stacked Mobile]
-    Main --> LeftCol[Left Column: Criteria Matrix<br/>Dynamic Headers by Scale<br/>Story: Warnings for high levels<br/>Epic: No warnings]
-    Main --> RightCol[Right Column: Suggestion Badge<br/>Large centered value<br/>Matches Criteria height]
+    TypeSelect --> CriteriaSection[Criteria Matrix<br/>Dynamic Headers by Scale<br/>Story: Warnings for high levels<br/>Epic: No warnings]
+    CriteriaSection --> Suggestion[Suggestion Badge<br/>Large centered value<br/>Below Criteria]
 ```
 
 ### Estimation Page Components Structure
 - **Top**: Type Selector (Epic/Story toggle)
-- **Below**: 
-  - **Left (flex-1)**: Complexity Criteria with dynamic scale headers
-  - **Right (lg:w-96)**: Suggestion Panel with large badge (fixed height)
+- **Below**: Complexity Criteria with dynamic scale headers
+- **Bottom**: Suggestion Panel with large badge
 
 
 ### Settings Page Layout
