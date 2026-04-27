@@ -7,8 +7,8 @@ interface ResultPanelProps {
 // Same color progression as CriteriaPanel columns: green → blue → amber → red
 function getBadgeColors(score: number): string {
   if (score <= 2) return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 ring-emerald-400'
-  if (score <= 4) return 'bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300 ring-brand-400'
-  if (score <= 7) return 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 ring-amber-400'
+  if (score <= 5) return 'bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300 ring-brand-400'
+  if (score <= 8) return 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 ring-amber-400'
   return 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 ring-red-400'
 }
 
