@@ -1,23 +1,11 @@
-import { type EstimationResult, type ScaleConfig, numericScaleValue } from '../../types'
-import { Badge } from '../ui/Badge'
+import { type EstimationResult, type ScaleConfig } from '../../types'
 
 interface ResultPanelProps {
   result: EstimationResult | null
   scale: ScaleConfig
-  onAccept: () => void
-  onOverride: (value: number | string) => void
 }
 
-export function ResultPanel({ result, scale, onAccept, onOverride }: ResultPanelProps) {
-  // Helper: map internal spValue to actual scale value
-  function mapSpValueToScaleValue(spValue: number): number | string {
-    const sorted = [...scale.values].sort(
-      (a, b) => numericScaleValue(a) - numericScaleValue(b),
-    )
-    const found = sorted.find((v) => numericScaleValue(v) >= spValue)
-    return found ?? sorted[sorted.length - 1]
-  }
-
+export function ResultPanel({ result, scale }: ResultPanelProps) {
   // Helper: get unit label based on scale type
   function getUnitLabel(): string {
     if (scale.preset === 'tshirt') return ''

@@ -1,6 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { userEvent, within, expect } from '@storybook/test'
-import { useState } from 'react'
 import { ResultPanel } from './ResultPanel'
 import { type EstimationResult, SCALE_PRESETS } from '../../types'
 
@@ -28,38 +26,28 @@ export default meta
 type Story = StoryObj<typeof ResultPanel>
 
 export const NoResult: Story = {
-  args: { result: null, scale: fibScale, onAccept: () => {}, onOverride: () => {} },
+  args: { result: null, scale: fibScale },
 }
 
 export const WithSuggestion: Story = {
-  args: { result: mockResult, scale: fibScale, onAccept: () => {}, onOverride: () => {} },
+  args: { result: mockResult, scale: fibScale },
 }
 
 export const WithOverride: Story = {
-  args: { result: mockResultWithOverride, scale: fibScale, onAccept: () => {}, onOverride: () => {} },
+  args: { result: mockResultWithOverride, scale: fibScale },
 }
 
 function Controlled() {
-  const [result, setResult] = useState<EstimationResult>(mockResult)
   return (
     <ResultPanel
-      result={result}
+      result={mockResult}
       scale={fibScale}
-      onAccept={() => setResult({ ...result, finalValue: result.suggestedValue })}
-      onOverride={(v) => setResult({ ...result, finalValue: v })}
     />
   )
 }
 
-export const AcceptSuggestion: Story = {
+export const Default: Story = {
   render: () => <Controlled />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    const acceptBtn = await canvas.findByText(/Accept suggestion/i)
-    await userEvent.click(acceptBtn)
-    // After accepting, the button should disappear (finalValue is now set)
-    expect(canvas.queryByText(/Accept suggestion/i)).toBeNull()
-  },
 }
 
 export const ManualOverride: Story = {

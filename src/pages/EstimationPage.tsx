@@ -9,7 +9,7 @@ import { computeEstimation } from '../engine/suggestionEngine'
 export function EstimationPage() {
   const {
     itemType, ratings, result,
-    setItemType, setRating, setResult, setFinalValue,
+    setItemType, setRating, setResult,
   } = useSessionStore()
 
   const { storyScale, epicScale, storyCriteria, epicCriteria } = useSettingsStore()
@@ -58,8 +58,6 @@ export function EstimationPage() {
             <ResultPanel
               result={result}
               scale={scale}
-              onAccept={() => result && setFinalValue(result.suggestedValue)}
-              onOverride={(v) => setFinalValue(v)}
             />
           </div>
         </div>
