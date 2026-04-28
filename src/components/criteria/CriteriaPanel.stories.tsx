@@ -37,8 +37,8 @@ export const SelectLevel3OnFirstCriterion: Story = {
   render: () => <Controlled />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    // Click the "Level 3" card of the first criterion
-    const level3Buttons = await canvas.findAllByText(/Level 3/i)
+    // Click das dritte Level des ersten Kriteriums ("New component, clear requirements")
+    const level3Buttons = await canvas.findAllByText(/New component, clear requirements/i)
     await userEvent.click(level3Buttons[0])
     // Verify it is now selected (aria-pressed=true)
     expect(level3Buttons[0].closest('button')).toHaveAttribute('aria-pressed', 'true')

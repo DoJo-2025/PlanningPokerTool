@@ -39,12 +39,12 @@ const COLUMN_ACCENT: Record<number, { header: string; card: string; cardSelected
     cardSelected: 'border-brand-500 bg-brand-50 dark:bg-brand-900/30 shadow-brand-200 dark:shadow-brand-900/40',
   },
   5: {
-    header: 'bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400',
+    header: 'bg-amber-50 dark:bg-amber-900/20 text-amber-800 dark:text-amber-400',
     card: 'border-gray-200 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-600 hover:shadow-amber-100 dark:hover:shadow-none',
     cardSelected: 'border-amber-500 bg-amber-50 dark:bg-amber-900/30 shadow-amber-200 dark:shadow-amber-900/40',
   },
   6: {
-    header: 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400',
+    header: 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-400',
     card: 'border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-600 hover:shadow-red-100 dark:hover:shadow-none',
     cardSelected: 'border-red-500 bg-red-50 dark:bg-red-900/30 shadow-red-200 dark:shadow-red-900/40',
   },
@@ -88,7 +88,7 @@ export function CriteriaPanel({ criteria, ratings, scale, showWarnings = true, o
             >
               <div className="text-lg">{scaleValue}{unitLabel && ` ${unitLabel}`}</div>
               {warning && (
-                <div className="text-[10px] font-medium mt-1 leading-tight opacity-75">
+                <div className="text-[10px] font-medium mt-1 leading-tight">
                   ⚠ {warning}
                 </div>
               )}
@@ -109,10 +109,10 @@ export function CriteriaPanel({ criteria, ratings, scale, showWarnings = true, o
             >
               {/* Row label */}
               <div className="flex flex-col justify-center px-4 py-2.5 rounded-xl bg-gray-100/80 dark:bg-gray-800/80 border border-gray-200/60 dark:border-gray-700/60">
-                <span className="text-sm font-semibold text-gray-800 dark:text-gray-100 leading-tight">
+                <span className="text-sm font-semibold text-black dark:text-white leading-tight">
                   {criterion.label}
                 </span>
-                <span className="text-[11px] text-gray-400 dark:text-gray-500 mt-0.5 font-medium">
+                <span className="text-[11px] text-black dark:text-white mt-0.5 font-medium">
                   {Math.round(criterion.weight * 100)}% weight
                 </span>
               </div>
@@ -130,8 +130,8 @@ export function CriteriaPanel({ criteria, ratings, scale, showWarnings = true, o
                     className={[
                       'rounded-xl border-2 px-2.5 py-2 text-left text-[13px] leading-snug transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 cursor-pointer overflow-hidden',
                       isSelected
-                        ? `${accent.cardSelected} shadow-md font-semibold text-gray-900 dark:text-gray-50`
-                        : `bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-300 shadow-sm ${accent.card}`,
+                        ? `${accent.cardSelected} shadow-md font-semibold text-gray-900 dark:text-white`
+                        : `bg-white dark:bg-gray-900 text-black dark:text-white shadow-sm ${accent.card}`,
                     ].join(' ')}
                   >
                     {l.description}
